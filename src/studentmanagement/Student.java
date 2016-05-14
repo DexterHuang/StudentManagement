@@ -11,4 +11,5 @@ package studentmanagement;
  */
 public class Student {
 
+    public int id;
 }
