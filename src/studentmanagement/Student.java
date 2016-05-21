@@ -1,15 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package studentmanagement;
 
-/**
- *
- * @author jack2
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
 
-    public int id;
+    int studentID;
+
+    String name;
+
+    List<Module> modules = new ArrayList<Module>();
+
+    public Student(int studentID, String name) {
+        this.studentID = studentID;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return studentID + " " + name;
+    }
+
+    public boolean tookModule(Module module) {
+        return modules.contains(module);
+    }
+
+    void takeModule(Module module) {
+        modules.add(module);
+    }
+
 }
