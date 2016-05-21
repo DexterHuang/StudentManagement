@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package studentmanagement;
+
 public class Interface {
-    Runnable r;
-    public Interface(){
-        
+
+    public Interface() {
+
     }
 }
