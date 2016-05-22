@@ -5,9 +5,18 @@
  */
 package studentmanagement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Interface {
 
-    public Interface() {
+    List<InterfaceOption> options = new ArrayList<InterfaceOption>();
 
+    public void addOption(InterfaceOption option) {
+        options.add(option);
+    }
+
+    public InterfaceOption showAndGetOption() {
+        return Debug.getFromList(options, "Please choose what function you wish to use.");
     }
 }

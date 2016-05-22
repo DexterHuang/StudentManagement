@@ -15,4 +15,17 @@ public class InterfaceOption {
     public String toString() {
         return name;
     }
+
+    public InterfaceOption clone() {
+        return new InterfaceOption(name, runnable);
+    }
+
+    public InterfaceOption setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void run() {
+        runnable.run();
+    }
 }
