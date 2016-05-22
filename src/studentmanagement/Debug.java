@@ -1,6 +1,7 @@
 //This project is Developed by Huang Ching
 package studentmanagement;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,6 +21,7 @@ public class Debug {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
+    public static Console console;
 
     public static void Log(String str) {
         System.out.println(str);
@@ -63,7 +65,7 @@ public class Debug {
 
         String str = topString + "\n";
         for (String s : list) {
-            str += "| " + s + getRepeating(length - getNoColor(s).length(), "-") + " |\n";
+            str += "| " + s + getRepeating(length - getNoColor(s).length(), " ") + " |\n";
         }
         str += topString + "\n";
         return str;

@@ -64,7 +64,7 @@ public class StudentManagement {
                 registerModuleForStudent();
             }
         });
-        displayModulesTakenByStudent = new InterfaceOption("Display module taken by player", new Runnable() {
+        displayModulesTakenByStudent = new InterfaceOption("Display module taken by student", new Runnable() {
             @Override
             public void run() {
                 displayStudentModules();
@@ -97,7 +97,7 @@ public class StudentManagement {
         Student student = new Student(Debug.getInt("Please enter student ID."), Debug.getString("Please enter student name."));
         for (Student s : school.students) {
             if (s.studentID == student.studentID) {
-                Debug.LogError("Duplicate student ID, return to main menu.");
+                Debug.LogError("Duplicate student ID.");
                 retryOrReturnMainMenu(addStudentOption);
                 return;
             }
@@ -193,6 +193,7 @@ public class StudentManagement {
         if (module.isFull() == false) {
             if (student.modules.contains(module) == false) {
                 student.takeModule(module);
+                Debug.Log(student.toString() + " registered for module " + module + " successfully.");
                 pauseAndGoMainMenu();
                 return;
             } else {
@@ -208,7 +209,7 @@ public class StudentManagement {
         Interface inter = new Interface();
         inter.addOption(option.clone().setName("Try again"));
         inter.addOption(openMainMenu);
-        inter.showAndGetOption();
+        inter.showAndGetOption().run();
     }
 
     public static void pauseAndGoMainMenu() {
