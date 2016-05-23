@@ -16,6 +16,7 @@ public class StudentManagement {
     public static InterfaceOption displayModulesTakenByStudent;
     public static InterfaceOption openMainMenu;
 
+    //SA
     public static void main(String[] args) {
         init();
         openMainMenu();
