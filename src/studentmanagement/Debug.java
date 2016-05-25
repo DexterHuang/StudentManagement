@@ -53,7 +53,7 @@ public class Debug {
         if (idToClass.containsKey(i)) {
             return (T) idToClass.get(i);
         } else {
-            Debug.Log("Failed to select object, please try again");
+            Debug.Log("The ID you have entered does not exist, please try again");
             return getFromListWithID(list, msg);
         }
     }
