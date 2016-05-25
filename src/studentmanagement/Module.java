@@ -1,6 +1,6 @@
 package studentmanagement;
 
-public class Module {
+public class Module extends SearchableClass {
 
     int ModuleID;
 
@@ -30,5 +30,10 @@ public class Module {
     @Override
     public String toString() {
         return ModuleID + " " + ModuleName + " " + semester + " " + population + " " + maxPopulation;
+    }
+
+    @Override
+    public int getID() {
+        return ModuleID;
     }
 }

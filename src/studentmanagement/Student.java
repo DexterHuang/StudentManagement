@@ -3,7 +3,7 @@ package studentmanagement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Student {
+public class Student extends SearchableClass {
 
     int studentID;
 
@@ -29,4 +29,8 @@ public class Student {
         modules.add(module);
     }
 
+    @Override
+    public int getID() {
+        return studentID;
+    }
 }

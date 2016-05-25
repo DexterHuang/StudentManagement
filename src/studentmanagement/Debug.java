@@ -3,6 +3,7 @@ package studentmanagement;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,6 +30,32 @@ public class Debug {
 
     public static void LogError(String str) {
         System.out.println(ANSI_RED + "[ERROR]: " + ANSI_RESET + str);
+
+    }
+
+    public static <T> T getFromListWithID(List<?> list, String msg) {
+        List<String> sl = new ArrayList<String>();
+        HashMap<Integer, SearchableClass> idToClass = new HashMap<Integer, SearchableClass>();
+        for (Object o : list) {
+            SearchableClass sc = (SearchableClass) o;
+            sl.add(ANSI_GREEN + "[" + sc.getID() + "]" + ANSI_RESET + " - " + o.toString());
+            idToClass.put(sc.getID(), sc);
+        }
+        Log(msg);
+        Log("Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
+        Log(generateBoxString(sl));
+        Log("");
+        int i = getInt("Please enter the Index of the object you wish to select or type '-1' to return to main menu");
+        if (i < 0) {
+            StudentManagement.openMainMenu();
+            return null;
+        }
+        if (idToClass.containsKey(i)) {
+            return (T) idToClass.get(i);
+        } else {
+            Debug.Log("Failed to select object, please try again");
+            return getFromListWithID(list, msg);
+        }
     }
 
     public static <T> T getFromList(List<T> list, String msg) {

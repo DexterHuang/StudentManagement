@@ -109,7 +109,7 @@ public class StudentManagement {
     }
 
     public static void removeStudent() {
-        Student student = Debug.getFromList(school.students, "Please select student");
+        Student student = Debug.getFromListWithID(school.students, "Please select student");
         school.removeStudent(student.studentID);
         Debug.Log(student.toString() + " has been successfully removed.");
         pauseAndGoMainMenu();
@@ -130,7 +130,7 @@ public class StudentManagement {
     }
 
     public static void removeModule() {
-        Module module = Debug.getFromList(school.modules, "Please select module");
+        Module module = Debug.getFromListWithID(school.modules, "Please select module");
         for (Student s : school.students) {
             if (s.tookModule(module)) {
                 Debug.LogError(s.toString() + " is still taking this module - remove failed");
@@ -174,7 +174,7 @@ public class StudentManagement {
 
     public static void displayStudentModules() {
         List<String> l = new ArrayList<String>();
-        Student student = Debug.getFromList(school.students, "Please select studnet");
+        Student student = Debug.getFromListWithID(school.students, "Please select studnet");
         if (student.modules.isEmpty()) {
             Debug.LogError("module list is empty.");
             pauseAndGoMainMenu();
@@ -189,8 +189,8 @@ public class StudentManagement {
     }
 
     public static void registerModuleForStudent() {
-        Student student = Debug.getFromList(school.students, "Please select studnet");
-        Module module = Debug.getFromList(school.modules, "Please select module");
+        Student student = Debug.getFromListWithID(school.students, "Please select studnet");
+        Module module = Debug.getFromListWithID(school.modules, "Please select module");
         if (module.isFull() == false) {
             if (student.modules.contains(module) == false) {
                 student.takeModule(module);
