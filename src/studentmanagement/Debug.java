@@ -132,6 +132,18 @@ public class Debug {
         }
     }
 
+    public static int getInt(String msg, int min, int max) {
+        int i = getInt(msg);
+        if (i < min) {
+            Debug.LogError("The value must be greater or equal to " + min);
+            return getInt(msg, min, max);
+        } else if (i > max) {
+            Debug.LogError("The value must be smaller or equal to " + max);
+            return getInt(msg, min, max);
+        }
+        return i;
+    }
+
     static String getString(String msg) {
         Scanner sc = new Scanner(System.in);
         System.out.println(msg);

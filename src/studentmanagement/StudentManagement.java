@@ -116,7 +116,12 @@ public class StudentManagement {
     }
 
     public static void addModule() {
-        Module module = new Module(Debug.getInt("Please enter module ID"), Debug.getString("Please eneter module name"), Debug.getInt("Please eneter max population limit"), Debug.getInt("Please eneter semestrer number."));
+
+        int id = Debug.getInt("Please enter module ID");
+        String name = Debug.getString("Please eneter module name");
+        int limit = Debug.getInt("Please eneter max population limit");
+        int se = Debug.getInt("Please eneter semestrer number.", 1, 2);
+        Module module = new Module(id, name, limit, se);
         for (Module m : school.modules) {
             if (m.ModuleID == module.ModuleID) {
                 Debug.LogError("Duplicate module ID");
