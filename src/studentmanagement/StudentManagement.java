@@ -17,6 +17,7 @@ public class StudentManagement {
     public static InterfaceOption openMainMenuOption;
     public static InterfaceOption moduleMatterOption;
     public static InterfaceOption studentMatterOption;
+    public static InterfaceOption quitProgramOption;
 
     public static Interface mainMenuInterface;
     public static Interface moduleMatterInterface;
@@ -99,6 +100,14 @@ public class StudentManagement {
             }
         });
 
+        quitProgramOption = new InterfaceOption("Exit Student Management", new Runnable() {
+            @Override
+            public void run() {
+                Debug.Log("Bye bye~~~~");
+                System.exit(0);
+            }
+        });
+
         studentMatterInterface = new Interface("Student Matters");
         studentMatterInterface.addOption(addStudentOption);
         studentMatterInterface.addOption(removeStudentOption);
@@ -116,6 +125,7 @@ public class StudentManagement {
         mainMenuInterface = new Interface("Main Menu");
         mainMenuInterface.addOption(studentMatterOption);
         mainMenuInterface.addOption(moduleMatterOption);
+        mainMenuInterface.addOption(quitProgramOption);
 
     }
 
