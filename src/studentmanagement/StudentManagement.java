@@ -99,7 +99,7 @@ public class StudentManagement {
             }
         });
 
-        studentMatterInterface = new Interface();
+        studentMatterInterface = new Interface("Student Matters");
         studentMatterInterface.addOption(addStudentOption);
         studentMatterInterface.addOption(removeStudentOption);
         studentMatterInterface.addOption(displayStudentOption);
@@ -107,13 +107,13 @@ public class StudentManagement {
         studentMatterInterface.addOption(displayModulesTakenByStudent);
         studentMatterInterface.addOption(openMainMenuOption);
 
-        moduleMatterInterface = new Interface();
+        moduleMatterInterface = new Interface("Module Matters");
         moduleMatterInterface.addOption(addModuleOption);
         moduleMatterInterface.addOption(removeModuleOption);
         moduleMatterInterface.addOption(displayModuleListOption);
         moduleMatterInterface.addOption(openMainMenuOption);
 
-        mainMenuInterface = new Interface();
+        mainMenuInterface = new Interface("Main Menu");
         mainMenuInterface.addOption(studentMatterOption);
         mainMenuInterface.addOption(moduleMatterOption);
 
@@ -186,8 +186,7 @@ public class StudentManagement {
         for (Module m : school.modules) {
             l.add(m.toString());
         }
-        Debug.Log("Module list:");
-        Debug.Log(Debug.generateBoxString(l));
+        Debug.Log(Debug.generateBoxString(l, "Module list:"));
         pauseAndGoMainMenu();
     }
 
@@ -201,8 +200,7 @@ public class StudentManagement {
         for (Student s : school.students) {
             l.add(s.toString());
         }
-        Debug.Log("Student list:");
-        Debug.Log(Debug.generateBoxString(l));
+        Debug.Log(Debug.generateBoxString(l, "Student list:"));
         pauseAndGoMainMenu();
     }
 
@@ -217,8 +215,7 @@ public class StudentManagement {
         for (Module m : student.modules) {
             l.add(m.toString());
         }
-        Debug.Log("Module taken by " + student.toString() + ":");
-        Debug.Log(Debug.generateBoxString(l));
+        Debug.Log(Debug.generateBoxString(l, "Module taken by " + student.toString() + ":"));
         pauseAndGoMainMenu();
     }
 
@@ -241,7 +238,7 @@ public class StudentManagement {
     }
 
     public static void retryOrReturnMainMenu(InterfaceOption option) {
-        Interface inter = new Interface();
+        Interface inter = new Interface("Do you want to try again?");
         inter.addOption(option.clone().setName("Try again"));
         inter.addOption(openMainMenuOption);
         inter.showAndGetOption().run();

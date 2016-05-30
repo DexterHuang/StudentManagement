@@ -34,6 +34,10 @@ public class Debug {
     }
 
     public static <T> T getFromListWithID(List<?> list, String msg) {
+        return getFromListWithID(list, msg, msg);
+    }
+
+    public static <T> T getFromListWithID(List<?> list, String msg, String title) {
         List<String> sl = new ArrayList<String>();
         HashMap<Integer, SearchableClass> idToClass = new HashMap<Integer, SearchableClass>();
         for (Object o : list) {
@@ -43,7 +47,7 @@ public class Debug {
         }
         Log(msg);
         Log("Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
-        Log(generateBoxString(sl));
+        Log(generateBoxString(sl, title));
         Log("");
         int i = getInt("Please enter the Index of the object you wish to select or type '-1' to return to main menu");
         if (i < 0) {
@@ -59,6 +63,10 @@ public class Debug {
     }
 
     public static <T> T getFromList(List<T> list, String msg) {
+        return getFromList(list, msg, msg);
+    }
+
+    public static <T> T getFromList(List<T> list, String msg, String title) {
         List<String> sl = new ArrayList<String>();
         int index = 0;
         for (T o : list) {
@@ -67,9 +75,9 @@ public class Debug {
         }
         Log(msg);
         Log("Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
-        Log(generateBoxString(sl));
+        Log(generateBoxString(sl, title));
         Log("");
-        int i = getInt("Please enter the Index of the object you wish to select or type '-1' to return to main menu");
+        int i = getInt("Please enter the Index of the object you wish to select or type '-1' to return to main menu", -1, sl.size() - 1);
         if (i < 0) {
             StudentManagement.openMainMenu();
             return null;
@@ -77,13 +85,17 @@ public class Debug {
         try {
             return list.get(i);
         } catch (Exception e) {
-            Debug.Log("Failed to select object, please try again : " + e.getMessage());
+            Debug.LogError("Failed to select object, please try again : " + e.getMessage());
             return getFromList(list, msg);
         }
     }
 
-    public static String generateBoxString(List<String> list) {
-        int length = getLongest(list);
+    public static String generateBoxString(List<String> list, String title) {
+        title = ANSI_CYAN + "[" + title + "]" + ANSI_RESET;
+        List<String> temp = new ArrayList<String>();
+        temp.add(title);
+        temp.addAll(list);
+        int length = getLongest(temp);
         String topString = "+-";
         for (int i = 1; i <= length; i++) {
             topString += "-";
@@ -91,7 +103,7 @@ public class Debug {
         topString += "-+";
 
         String str = topString + "\n";
-        for (String s : list) {
+        for (String s : temp) {
             str += "| " + s + getRepeating(length - getNoColor(s).length(), " ") + " |\n";
         }
         str += topString + "\n";
@@ -150,7 +162,7 @@ public class Debug {
         try {
             return sc.next();
         } catch (Exception e) {
-            Debug.Log("Failed to get Int, please try again : " + e.getMessage());
+            Debug.LogError("Failed to get Int, please try again : " + e.getMessage());
             return getString(msg);
         }
     }
