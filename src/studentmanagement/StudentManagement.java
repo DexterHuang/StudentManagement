@@ -14,7 +14,13 @@ public class StudentManagement {
     public static InterfaceOption displayStudentOption;
     public static InterfaceOption registerModuleOption;
     public static InterfaceOption displayModulesTakenByStudent;
-    public static InterfaceOption openMainMenu;
+    public static InterfaceOption openMainMenuOption;
+    public static InterfaceOption moduleMatterOption;
+    public static InterfaceOption studentMatterOption;
+
+    public static Interface mainMenuInterface;
+    public static Interface moduleMatterInterface;
+    public static Interface studentMatterInterface;
 
     //SA
     public static void main(String[] args) {
@@ -59,7 +65,7 @@ public class StudentManagement {
                 displayStudentList();
             }
         });
-        registerModuleOption = new InterfaceOption("Register Module", new Runnable() {
+        registerModuleOption = new InterfaceOption("Register Module for Student", new Runnable() {
             @Override
             public void run() {
                 registerModuleForStudent();
@@ -72,26 +78,49 @@ public class StudentManagement {
             }
         });
 
-        openMainMenu = new InterfaceOption("go to main menu", new Runnable() {
+        openMainMenuOption = new InterfaceOption("go to main menu", new Runnable() {
             @Override
             public void run() {
                 openMainMenu();
             }
         });
+
+        studentMatterOption = new InterfaceOption("Student Matters", new Runnable() {
+            @Override
+            public void run() {
+                studentMatterInterface.showAndGetOption().run();
+            }
+        });
+
+        moduleMatterOption = new InterfaceOption("Module Matters", new Runnable() {
+            @Override
+            public void run() {
+                moduleMatterInterface.showAndGetOption().run();
+            }
+        });
+
+        studentMatterInterface = new Interface();
+        studentMatterInterface.addOption(addStudentOption);
+        studentMatterInterface.addOption(removeStudentOption);
+        studentMatterInterface.addOption(displayStudentOption);
+        studentMatterInterface.addOption(registerModuleOption);
+        studentMatterInterface.addOption(displayModulesTakenByStudent);
+        studentMatterInterface.addOption(openMainMenuOption);
+
+        moduleMatterInterface = new Interface();
+        moduleMatterInterface.addOption(addModuleOption);
+        moduleMatterInterface.addOption(removeModuleOption);
+        moduleMatterInterface.addOption(displayModuleListOption);
+        moduleMatterInterface.addOption(openMainMenuOption);
+
+        mainMenuInterface = new Interface();
+        mainMenuInterface.addOption(studentMatterOption);
+        mainMenuInterface.addOption(moduleMatterOption);
+
     }
 
     public static void openMainMenu() {
-        Interface inter = new Interface();
-
-        inter.addOption(addStudentOption);
-        inter.addOption(removeStudentOption);
-        inter.addOption(addModuleOption);
-        inter.addOption(removeModuleOption);
-        inter.addOption(displayModuleListOption);
-        inter.addOption(displayStudentOption);
-        inter.addOption(registerModuleOption);
-        inter.addOption(displayModulesTakenByStudent);
-        inter.showAndGetOption().run();
+        mainMenuInterface.showAndGetOption().run();
     }
 
     public static void addStudent() {
@@ -214,7 +243,7 @@ public class StudentManagement {
     public static void retryOrReturnMainMenu(InterfaceOption option) {
         Interface inter = new Interface();
         inter.addOption(option.clone().setName("Try again"));
-        inter.addOption(openMainMenu);
+        inter.addOption(openMainMenuOption);
         inter.showAndGetOption().run();
     }
 
