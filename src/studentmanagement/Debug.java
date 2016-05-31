@@ -97,20 +97,19 @@ public class Debug {
         temp.addAll(list);
         int length = getLongest(temp);
         int titleLength = getNoColor(title).length();
-        if (length > titleLength) {
-            int diff = (length - titleLength) / 2;
-            for (int i = 1; i <= diff; i++) {
-                title = " " + title + " ";
-            }
+        temp.remove(0);
+        int diff = (length - titleLength) / 2;
+        for (int i = 1; i <= diff; i++) {
+            title = "-" + title + "-";
         }
-        temp.set(0, title);
+        title = "+-" + title + "-+";
         String topString = "+-";
         for (int i = 1; i <= length; i++) {
             topString += "-";
         }
         topString += "-+";
 
-        String str = topString + "\n";
+        String str = title + "\n";
         for (String s : temp) {
             str += "| " + s + getRepeating(length - getNoColor(s).length(), " ") + " |\n";
         }
