@@ -8,8 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -59,9 +57,12 @@ public class SerializationHandler {
             try {
                 fileIn.close();
             } catch (IOException ex) {
-                Logger.getLogger(SerializationHandler.class.getName()).log(Level.SEVERE, null, ex);
+
+            } catch (NullPointerException e) {
+
             }
         }
         return o;
+
     }
 }

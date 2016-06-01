@@ -112,11 +112,16 @@ public class StudentManagement {
             }
         });
 
-        loadSaveFileOption = new InterfaceOption("use save file", new Runnable() {
+        loadSaveFileOption = new InterfaceOption("Load save file", new Runnable() {
             @Override
             public void run() {
-                school = SerializationHandler.loadClass("SchoolSave");
-                Debug.LogInfo("Save file has been loaded.");
+                School s = SerializationHandler.loadClass("SchoolSave");
+                if (s != null) {
+                    school = s;
+                    Debug.LogInfo("Save file has been loaded.");
+                } else {
+                    Debug.LogError("Save file loading failed! its most likely because you didnt exit the app normally or its the first launch of this app");
+                }
                 openMainMenu();
             }
 
