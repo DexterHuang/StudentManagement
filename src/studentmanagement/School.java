@@ -48,6 +48,7 @@ public class School {
     }
 
     public Student getStudent(int id) {
+
         for (Student s : students) {
             if (s.studentID == id) {
                 return s;
