@@ -28,7 +28,8 @@ public class StudentManagement {
     public static void main(String[] args) {
         init();
         Debug.LogInfo("Welcom to SchoolApp made for IP assignment by Huang Ching");
-        Debug.LogInfo("if you have used this app before you can select Load save file to load previous progresses");
+        Debug.LogInfo("If you have used this app before you can select Load save file to load previous progresses");
+        Debug.LogInfo("I did not make the save load on startup because it is not part of the requirment of the assigment, however it can be easily implimented");
         openMainMenu();
     }
 

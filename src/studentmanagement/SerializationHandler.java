@@ -28,12 +28,12 @@ public class SerializationHandler {
             return true;
         } catch (FileNotFoundException ex) {
             Debug.LogError("File not found : " + ex.getLocalizedMessage());
-        } catch (IOException ex) {
-            Debug.LogError("Inout output error : " + ex.getLocalizedMessage());
+        } catch (Exception ex) {
+            Debug.LogError("save file failed : " + ex.getLocalizedMessage());
         }
         try {
             fileOut.close();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
         }
         return false;
     }
