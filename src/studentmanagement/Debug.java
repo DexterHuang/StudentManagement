@@ -33,6 +33,10 @@ public class Debug {
 
     }
 
+    public static void LogInfo(String str) {
+        System.out.println(ANSI_YELLOW + "[INFO]: " + str + ANSI_RESET);
+    }
+
     public static <T> T getFromListWithID(List<?> list, String msg) {
         return getFromListWithID(list, msg, msg);
     }
@@ -48,7 +52,6 @@ public class Debug {
         Log(msg);
         Log("Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
         Log(generateBoxString(sl, title));
-        Log("");
         int i = getInt("Please enter the Index of the object you wish to select or type '-1' to return to main menu");
         if (i < 0) {
             StudentManagement.openMainMenu();
@@ -113,7 +116,7 @@ public class Debug {
         for (String s : temp) {
             str += "| " + s + getRepeating(length - getNoColor(s).length(), " ") + " |\n";
         }
-        str += topString + "\n";
+        str += topString;
         return str;
     }
 

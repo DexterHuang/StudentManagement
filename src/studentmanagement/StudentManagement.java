@@ -18,6 +18,7 @@ public class StudentManagement {
     public static InterfaceOption moduleMatterOption;
     public static InterfaceOption studentMatterOption;
     public static InterfaceOption quitProgramOption;
+    public static InterfaceOption loadSaveFileOption;
 
     public static Interface mainMenuInterface;
     public static Interface moduleMatterInterface;
@@ -26,6 +27,8 @@ public class StudentManagement {
     //SA
     public static void main(String[] args) {
         init();
+        Debug.LogInfo("Welcom to SchoolApp made for IP assignment by Huang Ching");
+        Debug.LogInfo("if you have used this app before you can select Load save file to load previous progresses");
         openMainMenu();
     }
 
@@ -104,8 +107,19 @@ public class StudentManagement {
             @Override
             public void run() {
                 Debug.Log("Bye bye~~~~");
+                SerializationHandler.saveClass(school, "SchoolSave");
                 System.exit(0);
             }
+        });
+
+        loadSaveFileOption = new InterfaceOption("use save file", new Runnable() {
+            @Override
+            public void run() {
+                school = SerializationHandler.loadClass("SchoolSave");
+                Debug.LogInfo("Save file has been loaded.");
+                openMainMenu();
+            }
+
         });
 
         studentMatterInterface = new Interface("Student Matters");
@@ -125,8 +139,8 @@ public class StudentManagement {
         mainMenuInterface = new Interface("Main Menu");
         mainMenuInterface.addOption(studentMatterOption);
         mainMenuInterface.addOption(moduleMatterOption);
+        mainMenuInterface.addOption(loadSaveFileOption);
         mainMenuInterface.addOption(quitProgramOption);
-
     }
 
     public static void openMainMenu() {

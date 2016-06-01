@@ -8,7 +8,7 @@ package studentmanagement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class School {
+public class School extends SearchableClass {
 
     String schoolName;
     List<Module> modules = new ArrayList<Module>();
@@ -48,7 +48,6 @@ public class School {
     }
 
     public Student getStudent(int id) {
-
         for (Student s : students) {
             if (s.studentID == id) {
                 return s;
