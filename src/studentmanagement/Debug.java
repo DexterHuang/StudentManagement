@@ -49,9 +49,10 @@ public class Debug {
             sl.add(ANSI_GREEN + "[" + sc.getID() + "]" + ANSI_RESET + " - " + o.toString());
             idToClass.put(sc.getID(), sc);
         }
-        Log(msg);
-        Log("Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
-        Log(generateBoxString(sl, title));
+        List<String> des = new ArrayList<String>();
+        des.add(msg);
+        des.add("Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
+        Log(generateBoxString(sl, title, des));
         int i = getInt("Please enter the Index of the object you wish to select or type '-1' to return to main menu");
         if (i < 0) {
             StudentManagement.openMainMenu();
@@ -76,9 +77,10 @@ public class Debug {
             sl.add(ANSI_GREEN + "[" + index + "]" + ANSI_RESET + " - " + o.toString());
             index++;
         }
-        Log(msg);
-        Log("Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
-        Log(generateBoxString(sl, title));
+        List<String> des = new ArrayList<String>();
+        des.add(0, msg);
+        des.add(0, "Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
+        Log(generateBoxString(sl, title, des));
         Log("");
         int i = getInt("Please enter the Index of the object you wish to select or type '-1' to return to main menu", -1, sl.size() - 1);
         if (i < 0) {
@@ -94,30 +96,49 @@ public class Debug {
     }
 
     public static String generateBoxString(List<String> list, String title) {
+        return generateBoxString(list, title, new ArrayList<String>());
+    }
+
+    public static String generateBoxString(List<String> list, String title, List<String> des) {
         title = ANSI_CYAN + "[" + title + "]" + ANSI_RESET;
         List<String> temp = new ArrayList<String>();
         temp.add(title);
         temp.addAll(list);
         int length = getLongest(temp);
-        int titleLength = getNoColor(title).length();
-        temp.remove(0);
-        int diff = (length - titleLength) / 2;
-        for (int i = 1; i <= diff; i++) {
-            title = "-" + title + "-";
+        int desLength = getLongest(des);
+        if (desLength > length) {
+            length = desLength;
         }
-        title = "+-" + title + "-+";
+        temp.remove(0);
+        title = "+-" + centerString(title, length, '-') + "-+";
         String topString = "+-";
         for (int i = 1; i <= length; i++) {
             topString += "-";
         }
         topString += "-+";
-
         String str = title + "\n";
+        for (String s : des) {
+            str += "| " + centerString(s, length, ' ') + " |\n";
+        }
         for (String s : temp) {
             str += "| " + s + getRepeating(length - getNoColor(s).length(), " ") + " |\n";
         }
         str += topString;
         return str;
+    }
+
+    private static String centerString(String str, int length, char charactor) {
+        int strLength = getNoColor(str).length();
+        int diff = length - strLength;
+        String space = "";
+        String remainderSpace = "";
+        for (int i = 0; i < diff / 2; i++) {
+            space += charactor;
+        }
+        if (diff % 2 > 0) {
+            remainderSpace += charactor;
+        }
+        return space + str + space + remainderSpace;
     }
 
     private static String getRepeating(int amount, String str) {
@@ -140,7 +161,7 @@ public class Debug {
     }
 
     private static String getNoColor(String str) {
-        return str.replaceAll("\u001B\\[[;\\d]*m", "");
+        return str.replaceAll("\u001B\\[[;\\d]*m", "").replaceAll("\n", "");
     }
 
     public static int getInt(String msg) {
@@ -175,5 +196,11 @@ public class Debug {
             Debug.LogError("Failed to get Int, please try again : " + e.getMessage());
             return getString(msg);
         }
+    }
+
+    static Boolean getBoolean(String msg) {
+        Debug.LogInfo("Enter {Y,Yes,True} to answer yes, all other input will return false");
+        String s = getString(msg);
+        return s.equalsIgnoreCase("Y") || s.equalsIgnoreCase("YES") || s.equalsIgnoreCase("True");
     }
 }

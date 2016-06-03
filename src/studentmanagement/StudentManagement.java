@@ -147,6 +147,7 @@ public class StudentManagement {
         mainMenuInterface.addOption(moduleMatterOption);
         mainMenuInterface.addOption(loadSaveFileOption);
         mainMenuInterface.addOption(quitProgramOption);
+
     }
 
     public static void openMainMenu() {
@@ -177,18 +178,21 @@ public class StudentManagement {
     public static void addModule() {
 
         int id = Debug.getInt("Please enter module ID");
-        String name = Debug.getString("Please eneter module name");
-        int limit = Debug.getInt("Please eneter max population limit");
-        int se = Debug.getInt("Please eneter semestrer number.", 1, 2);
-        Module module = new Module(id, name, limit, se);
         for (Module m : school.modules) {
-            if (m.ModuleID == module.ModuleID) {
-                Debug.LogError("Duplicate module ID");
+            if (m.ModuleID == id) {
+                Debug.LogError("Duplicate module ID!");
                 retryOrReturnMainMenu(addModuleOption);
                 return;
             }
         }
-        school.addModule(module);
+        String name = Debug.getString("Please eneter module name");
+        int limit = Debug.getInt("Please eneter max population limit");
+        int se = Debug.getInt("Please eneter semestrer number.", 1, 2);
+        Module module = new Module(id, name, limit, se);
+
+        if (Debug.getBoolean("Please confirm to add " + module.toString() + ".")) {
+            school.addModule(module);
+        }
         Debug.Log("Added " + module.toString() + " sucessfully.");
         pauseAndGoMainMenu();
     }
