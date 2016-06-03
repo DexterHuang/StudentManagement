@@ -249,7 +249,7 @@ public class StudentManagement {
         for (Module m : student.modules) {
             l.add(m.toString());
         }
-        Debug.Log(Debug.generateBoxString(l, "Module taken by " + student.toString() + ":"));
+        Debug.Log(Debug.generateBoxString(l, "Module taken by " + student.toString() + ":", "This list shows moudles that is \n taken by " + student.toString()));
         pauseAndGoMainMenu();
     }
 

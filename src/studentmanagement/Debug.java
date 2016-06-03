@@ -95,6 +95,15 @@ public class Debug {
         }
     }
 
+    public static String generateBoxString(List<String> list, String title, String description) {
+        List<String> des = new ArrayList<String>();
+        String[] l = description.split("\n");
+        for (String s : l) {
+            des.add(s);
+        }
+        return generateBoxString(list, title, des);
+    }
+
     public static String generateBoxString(List<String> list, String title) {
         return generateBoxString(list, title, new ArrayList<String>());
     }
