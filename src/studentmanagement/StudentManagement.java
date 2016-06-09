@@ -105,7 +105,11 @@ public class StudentManagement {
             @Override
             public void run() {
                 Debug.Log("Bye bye~~~~");
-                SerializationHandler.saveClass(school, "SchoolSave");
+                try {
+                    SerializationHandler.saveClass(school, "SchoolSave");
+                } catch (Exception e) {
+                    Debug.LogError("I have encontered an problem while saving the file, no file was saved! : " + e.getLocalizedMessage());
+                }
                 System.exit(0);
             }
         });
