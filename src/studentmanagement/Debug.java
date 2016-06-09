@@ -71,14 +71,18 @@ public class Debug {
     }
 
     public static <T> T getFromList(List<T> list, String msg, String title) {
+        List<String> des = new ArrayList<String>();
+        des.add(0, msg);
+        return getFromList(list, title, des);
+    }
+
+    public static <T> T getFromList(List<T> list, String title, List<String> des) {
         List<String> sl = new ArrayList<String>();
         int index = 0;
         for (T o : list) {
             sl.add(ANSI_GREEN + "[" + index + "]" + ANSI_RESET + " - " + o.toString());
             index++;
         }
-        List<String> des = new ArrayList<String>();
-        des.add(0, msg);
         des.add(0, "Please choose an object from the list below(Enter the " + ANSI_GREEN + "[Index]" + ANSI_RESET + ")");
         Log(generateBoxString(sl, title, des));
         Log("");
@@ -91,7 +95,7 @@ public class Debug {
             return list.get(i);
         } catch (Exception e) {
             Debug.LogError("Failed to select object, please try again : " + e.getMessage());
-            return getFromList(list, msg);
+            return getFromList(list, title, des);
         }
     }
 

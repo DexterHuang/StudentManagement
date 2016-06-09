@@ -12,16 +12,25 @@ public class Interface {
 
     List<InterfaceOption> options = new ArrayList<InterfaceOption>();
     String title;
+    List<String> header = new ArrayList<String>();
 
     public Interface(String title) {
         this.title = title;
+        header.add("Please choose what function you wish to use.");
     }
 
     public void addOption(InterfaceOption option) {
         options.add(option);
     }
 
+    public void addHeader(String str) {
+        header.add(str);
+    }
+
     public InterfaceOption showAndGetOption() {
-        return Debug.getFromList(options, "Please choose what function you wish to use.", title);
+        for (int i = 1; i <= 10; i++) {
+            Debug.Log("");
+        }
+        return Debug.getFromList(options, title, header);
     }
 }

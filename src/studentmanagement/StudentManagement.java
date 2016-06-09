@@ -27,9 +27,6 @@ public class StudentManagement {
     //SA
     public static void main(String[] args) {
         init();
-        Debug.LogInfo("Welcom to SchoolApp made for IP assignment by Huang Ching");
-        Debug.LogInfo("If you have used this app before you can select Load save file to load previous progresses");
-        Debug.LogInfo("I did not make the save load on startup because it is not part of the requirment of the assigment, however it can be easily implimented");
         openMainMenu();
     }
 
@@ -143,6 +140,10 @@ public class StudentManagement {
         moduleMatterInterface.addOption(openMainMenuOption);
 
         mainMenuInterface = new Interface("Main Menu");
+        mainMenuInterface.addHeader(Debug.ANSI_YELLOW + "Welcom to SchoolApp made for IP assignment by Huang Ching" + Debug.ANSI_RESET);
+        mainMenuInterface.addHeader(Debug.ANSI_YELLOW + "If you have used this app before you can select Load save file to load previous progresses" + Debug.ANSI_RESET);
+        mainMenuInterface.addHeader(Debug.ANSI_YELLOW + "I did not make the save load on startup because it is not part of the requirment of the assigment," + Debug.ANSI_RESET);
+        mainMenuInterface.addHeader(Debug.ANSI_YELLOW + "however it can be easily implimented" + Debug.ANSI_RESET);
         mainMenuInterface.addOption(studentMatterOption);
         mainMenuInterface.addOption(moduleMatterOption);
         mainMenuInterface.addOption(loadSaveFileOption);
